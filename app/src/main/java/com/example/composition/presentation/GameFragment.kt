@@ -58,7 +58,6 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setClickListenersToOptions()
-        // Hello world!
         viewModel.startGame(level)
     }
 
