@@ -5,27 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.composition.R
+import com.example.composition.databinding.FragmentGameBinding
 import com.example.composition.databinding.FragmentStartIntroBinding
 
-class StartIntroFragment : Fragment() {
+class GameFragment:Fragment() {
 
-    private var _binding: FragmentStartIntroBinding? = null
-    private val binding: FragmentStartIntroBinding
-        get() = _binding ?: throw RuntimeException("FragmentStartIntroBinding == null")
+    private var _binding: FragmentGameBinding? = null
+    private val binding: FragmentGameBinding
+        get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStartIntroBinding.inflate(inflater, container, false)
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.buttonUnderstand.setOnClickListener {
-
-        }
     }
 
     override fun onDestroyView() {

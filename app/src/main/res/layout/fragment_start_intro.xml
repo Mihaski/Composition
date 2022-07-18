@@ -44,6 +44,7 @@
             tools:layout_editor_absoluteX="16dp" />
 
         <Button
+            android:id="@+id/button_understand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Margin16dp"
