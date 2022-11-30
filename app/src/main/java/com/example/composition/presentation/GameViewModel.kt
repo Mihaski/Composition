@@ -102,13 +102,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         val seconds = p0 / MILLIS_IN_SECONDS
         val minutes = seconds / SEC_IN_MIN
         val leftSeconds = seconds - (minutes * SEC_IN_MIN)
-        return String().format("%02d:%02d", minutes, leftSeconds)
+        return String.format("%02d:%02d", minutes, leftSeconds)
     }
 
     private fun updateProgress() {
         val percent = calculatePercentOfRightAnswer()
         _percentOfRightAnswers.value = percent
-        _progressAnswers.value = String().format(
+        _progressAnswers.value = String.format(
             context.resources.getString(R.string.progress_answer),
             countOfRightAnswers,
             gameSettings.minCountOfRightAnswers
