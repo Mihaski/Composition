@@ -24,7 +24,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _percentOfRightAnswers = MutableLiveData<Int>()
     val percentOfRightAnswers: LiveData<Int>
         get() = _percentOfRightAnswers
-    //asdasd
 
     private val _progressAnswers = MutableLiveData<String>()
     val progressAnswers: LiveData<String>
