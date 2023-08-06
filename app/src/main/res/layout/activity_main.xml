@@ -7,4 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="com.example.composition.presentation.StartIntroFragment"
-    tools:context=".presentation.MainActivity" />
+    tools:context=".presentation.MainActivity"
+    tools:layout="@layout/fragment_start_intro" />

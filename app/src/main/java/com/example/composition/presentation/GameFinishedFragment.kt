@@ -37,6 +37,7 @@ class GameFinishedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvScoreAnswers.text = viewModel.progressAnswers.toString()
+        binding.tvRequiredPercentage.text = viewModel.enoughPercent.toString()
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
