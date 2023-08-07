@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import com.example.composition.R
 import com.example.composition.databinding.FragmentGameFinishedBinding
 import com.example.composition.domain.entity.GameResult
 
@@ -19,13 +19,6 @@ class GameFinishedFragment : Fragment() {
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding == null")
 
-    private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        )[GameViewModel::class.java]
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,8 +29,7 @@ class GameFinishedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvScoreAnswers.text = viewModel.progressAnswers.toString()
-        binding.tvRequiredPercentage.text = viewModel.enoughPercent.toString()
+        setValueGResult()
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
@@ -47,6 +39,41 @@ class GameFinishedFragment : Fragment() {
             })
         binding.buttonRetry.setOnClickListener {
             retryGame()
+        }
+    }
+
+    private fun setValueGResult() {
+        with(binding) {
+            emojiResult.setImageResource(getEmoResId())
+            tvRequiredAnswers.text = String.format(
+                getString(R.string.tv_required_answer_text),
+                gameResult.gameSettings.minCountOfRightAnswers
+            )
+            tvScoreAnswers.text = String.format(
+                getString(R.string.tv_score_answer_text),
+                gameResult.countOfRightAnswers
+            )
+            tvRequiredPercentage.text = String.format(
+                getString(R.string.tv_required_perc_text),
+                gameResult.gameSettings.minPercentOfRightAnswers
+            )
+            tvScorePercentage.text = String.format(
+                getString(R.string.tv_score_perc_text),
+                calcPercentOfRightAnswer()
+            )
+        }
+    }
+
+    private fun getEmoResId(): Int {
+        return if (gameResult.winner) R.drawable.happy_win_smile
+        else R.drawable.sad_lose_smile
+    }
+
+    private fun calcPercentOfRightAnswer() = with(gameResult) {
+        if (countOfQuestions == 0) {
+            0
+        } else {
+            ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
         }
     }
 
