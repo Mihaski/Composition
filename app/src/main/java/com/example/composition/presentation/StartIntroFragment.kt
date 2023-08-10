@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.composition.R
 import com.example.composition.databinding.FragmentStartIntroBinding
 
@@ -30,10 +31,7 @@ class StartIntroFragment : Fragment() {
     }
 
     private fun launchChooseLevelFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, ChooseLevelFragment.newInstance())
-            .addToBackStack(ChooseLevelFragment.NAME)
-            .commit()
+        findNavController().navigate(R.id.action_startIntroFragment_to_chooseLevelFragment)
     }
 
     override fun onDestroyView() {
